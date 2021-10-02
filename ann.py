@@ -13,7 +13,7 @@ logging.basicConfig(filename= os.path.join(log_dir,"running_logs.log"),level=log
 
 def train_model(model_clf, epochs, X_train, y_train, X_valid, y_valid):
     LOSS_FUNCTION = "sparse_categorical_crossentropy"
-    OPTIMIZER = "ADAM"
+    OPTIMIZER = "SGD"
     METRICS = ["accuracy"]
     VALIDATION = (X_valid, y_valid)
     model_clf.compile(loss=LOSS_FUNCTION, optimizer=OPTIMIZER, metrics=METRICS)
@@ -22,7 +22,7 @@ def train_model(model_clf, epochs, X_train, y_train, X_valid, y_valid):
     logging.info("-----"*10)
 
     history = model_clf.fit(X_train, y_train, epochs=epochs, validation_data=VALIDATION)
-    model_clf.save("models/model.h5")
+    model_clf.save("models/model_ann")
 
     return model_clf, history
 
@@ -46,7 +46,7 @@ def main(epochs):
 
     model, history = train_model(model, epochs, X_train, y_train, X_valid, y_valid)
 
-    save_plot(history, "plot1")
+    save_plot(history, "graph")
 
     test_model(model, X_test, y_test)
 
