@@ -22,7 +22,7 @@ def train_model(model_clf, epochs, X_train, y_train, X_valid, y_valid):
     logging.info("-----"*10)
 
     history = model_clf.fit(X_train, y_train, epochs=epochs, validation_data=VALIDATION)
-    model_clf.save("models/model_ann")
+    model_clf.save("models/model.h5")
 
     return model_clf, history
 
